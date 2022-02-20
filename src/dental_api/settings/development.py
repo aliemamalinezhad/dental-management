@@ -1,15 +1,29 @@
-import dental_api.settings.base as base
-import os
+from .base import *
 
+
+SECRET_KEY = 'v0c#!33+hz=@xk(3+hncg$&klh8u)nx$u+x@&xx@7r&c=nln^@'
 DEBUG = True
-
-ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(base.BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5433',
+
     }
 }
-
 STATIC_URL = '/static/'
+
+
+
+
+
+
+
+
+
+
+

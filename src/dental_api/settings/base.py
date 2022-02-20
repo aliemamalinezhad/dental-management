@@ -4,7 +4,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'v0c#!33+hz=@xk(3+hncg$&klh8u)nx$u+x@&xx@7r&c=nln^@'
 
 
 INSTALLED_APPS = [
@@ -14,7 +13,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
 ]
+
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
