@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  dental_postgresql:
+    image: postgres:12
+    container_name: dental_postgresql
+    volumes:
+      - dental_postgresql:/var/lib/postgresql/data
+    restart: always
+    env_file: .env
+    ports:
+      - "5433:5432"
+    networks:
+      - dental_network
+
+volumes:
+  dental_postgresql:
+    external: true
+
+networks:
+  dental_network:
+    external: true
