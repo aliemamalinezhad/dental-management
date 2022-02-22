@@ -63,3 +63,13 @@ class UpdateUserApiView(APIView):
             {'data': srz_data.errors},
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class DeleteUserApiView(APIView):
+    def delete(self, request, username):
+        user = get_object_or_404(User, username=username)
+        user.delete()
+        return Response(
+            {'status': 'Item deleted successfully'},
+            status=status.HTTP_204_NO_CONTENT,
+        )
