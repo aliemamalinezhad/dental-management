@@ -2,7 +2,8 @@ import uuid
 import os
 from django.db import models
 from django.contrib.auth import get_user_model
-import jsonfield
+# from django.contrib.postgres.fields import JSONField
+from django.db.models import JSONField
 from django.utils.translation import gettext as _
 
 from utils import GeneralModel
@@ -38,10 +39,10 @@ class Patient(GeneralModel):
         max_length=300
     )
     phone = models.BigIntegerField()
-    state = jsonfield.JSONField(
-        null=True,
-        blank=True
-    )
+    state = JSONField(null=True)
 
     def __str__(self):
-        f'{self.first_name} {self.last_name} | {self.creator}'
+        return f'{self.first_name} {self.last_name} |created by : {self.creator}'
+
+
+
