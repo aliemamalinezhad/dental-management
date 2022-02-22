@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-import jsonfield
+from django.db.models import JSONField
 from ..managers import CustomUserManager
 
 
@@ -12,7 +12,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     username = models.CharField(max_length=200)
     phone = models.BigIntegerField(null=True, blank=True)
-    perm = jsonfield.JSONField(null=True, blank=True)
+    perm =JSONField(null=True, blank=True)
     role = models.CharField(max_length=300, null=True)
     city = models.CharField(max_length=300, null=True)
     id_code = models.BigIntegerField(null=True)

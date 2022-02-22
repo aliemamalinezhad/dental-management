@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-
 from users.forms import CustomUserCreationForm, CustomUserChangeForm
 from users.models.user import CustomUser
 
@@ -12,7 +11,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'username', 'first_name', 'last_name', 'phone',)}),
+        (None, {'fields': ('email', 'password','id_code' ,'username', 'first_name', 'last_name', 'phone','perm','role','city',)}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
