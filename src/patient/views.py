@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import PatientSerializer, CreatePatientSerializer
 from rest_framework.permissions import IsAuthenticated
-from drf_yasg.utils import swagger_auto_schema
+from rest_framework.parsers import MultiPartParser, FormParser
+
 
 class GetAllAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -23,6 +24,7 @@ class GetAllAPIView(APIView):
 
 class CreateApiView(APIView):
     permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request, *args, **kwargs):
         data = CreatePatientSerializer(data=request.data)

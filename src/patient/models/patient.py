@@ -30,6 +30,11 @@ class Patient(GeneralModel):
     last_name = models.CharField(
         max_length=300,
     )
+    file = models.FileField(
+        upload_to='patient/',
+        blank=True,
+        null=True
+    )
     email = models.EmailField(
         null=True,
         blank=True
