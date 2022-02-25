@@ -2,6 +2,7 @@ from rest_framework import serializers
 from patient.models.patient import Patient
 from users.serializers import UserSerializer
 
+
 class PatientSerializer(serializers.ModelSerializer):
 
     state = serializers.JSONField()
