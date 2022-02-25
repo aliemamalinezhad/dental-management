@@ -6,12 +6,12 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    access = AccessSerializer(read_only=True)
+    # access = AccessSerializer(read_only=True, many=True)
+    access = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = User
         fields = (
-            'first_name', 'last_name', 'email', 'username', 'role','perm','access',
-            'is_superuser', 'perm', 'id_code','phone',
+            'first_name', 'last_name', 'email', 'username', 'role', 'perm', 'access',
+            'is_superuser', 'perm', 'id_code', 'phone',
         )
-
-
