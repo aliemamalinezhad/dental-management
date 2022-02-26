@@ -1,14 +1,16 @@
 from patient.models.patient import Patient
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import PatientSerializer, CreatePatientSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
+from permision.patient import AuthorAllStaffAllButEditOrReadOnly
 
 
 class GetAllAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AuthorAllStaffAllButEditOrReadOnly]
 
     def get(self, request, *args, **kwargs):
         try:
@@ -23,7 +25,7 @@ class GetAllAPIView(APIView):
 
 
 class CreateApiView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AuthorAllStaffAllButEditOrReadOnly]
     parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request, *args, **kwargs):
@@ -42,3 +44,22 @@ class CreateApiView(APIView):
                 data.errors,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+
+class UpdatePatientApiView(APIView):
+    permission_classes = [AuthorAllStaffAllButEditOrReadOnly,]
+    parser_classes = (MultiPartParser, FormParser)
+
+    def put(self, request, id):
+        patient = get_object_or_404(Patient, pk=id)
+        srz_data = CreatePatientSerializer(instance=patient, data=request.data, partial=True)
+        if srz_data.is_valid():
+            srz_data.save()
+            return Response(
+                {'data': srz_data.data},
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {'data': srz_data.errors},
+            status=status.HTTP_400_BAD_REQUEST
+        )
